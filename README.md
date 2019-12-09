@@ -47,28 +47,28 @@ Also: notice that you can't open files natively! This is because your browser do
 * write some instructions
 * create makefile?
 * multiple keyword filters
-** once chosen, go to top of screen, click again to un-choose
+    * once chosen, go to top of screen, click again to un-choose
 * add weight calculations into ordering display, choosing which (in init too)
 * ability to search whole contents
 * UI tweaks:
-** animations!
-** add lines? (dashed, slightly darker blue)
-** shadow text box?
-** shorten names if necessary to fit in shape (multi-line or ...)
-** adjust number of items shown at different times
+    * animations!
+    * add lines? (dashed, slightly darker blue)
+    * shadow text box?
+    * shorten names if necessary to fit in shape (multi-line or ...)
+    * adjust number of items shown at different times
 * Fixes (not  mission critical):
-** `'NoneType object is not iterable'`
-** `libpng warning: iCCP: known incorrect sRGB profile`
-** `Premature end of JPEG file`
-** `Pandoc died with exitcode "1" during conversion: b"pandoc: couldn't parse docx file\nCallStack (from HasCallStack):\n  error, called at src/Text/Pandoc/Error.hs:55:28 in pandoc-1.19.2.4-HbfKWUyODESBIy0vGktOwX:Text.Pandoc.Error\n"`
+    * `'NoneType object is not iterable'`
+    * `libpng warning: iCCP: known incorrect sRGB profile`
+    * `Premature end of JPEG file`
+    * `Pandoc died with exitcode "1" during conversion: b"pandoc: couldn't parse docx file\nCallStack (from HasCallStack):\n  error, called at src/Text/Pandoc/Error.hs:55:28 in pandoc-1.19.2.4-HbfKWUyODESBIy0vGktOwX:Text.Pandoc.Error\n"`
 * add more keyword options
-** folder names -- also add individual words (split on space, dash, underscore, camelCase?)
-** also, folder/file names can conflict with keywords (case sensitive?)
-** some sort of proper noun lookup?
+    * folder names -- also add individual words (split on space, dash, underscore, camelCase?)
+    * also, folder/file names can conflict with keywords (case sensitive?)
+    * some sort of proper noun lookup?
 * generalize keywords semantically
-** ie, calculus --> math
-** music --> music type files
-** programming words --> programming files
+    * ie, calculus --> math
+    * music --> music type files
+    * programming words --> programming files
 
 ---
 
