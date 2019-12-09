@@ -8,8 +8,8 @@ from marshmallow import post_load
 # We need to convert the Python objects / SQLite rows into JSON so that the JavaScript can dynamically do everything
 
 class FolderSchema(ModelSchema):
-    children = Nested(lambda: FileSchema(many=True, exclude=("id", "contents")))
-    parent = Nested(lambda: FolderSchema(many=True, exclude=("parent",)))
+    #children = Nested(lambda: FileSchema(many=True, exclude=("id", "contents")))
+    #parent = Nested(lambda: FolderSchema(exclude=("parent",)))
 
     @post_load
     def make_folder(self, data, **kwargs):

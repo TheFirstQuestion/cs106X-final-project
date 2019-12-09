@@ -7,6 +7,7 @@ from File import File, Base
 
 ##################### Config ###########################
 ROOT_OF_FILE_SYSTEM = "./Example File System"
+# "./Example File System/Writing/Senior Paper/Sources"
 DB_NAME = "DATABASE-WOO.db"
 ########################################################
 
@@ -48,7 +49,7 @@ if __name__ == "__main__":
             session.add(File(f, session, counter))
             session.commit()
             counter = counter + 1
-        except:
-            continue
+        except Exception as e:
+            print(e)
 
     session.close()

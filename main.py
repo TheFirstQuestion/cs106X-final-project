@@ -7,6 +7,9 @@ from flask import Flask, render_template,redirect, url_for, request
 from initializeDatabase import ROOT_OF_FILE_SYSTEM, DB_NAME
 app = Flask(__name__)
 
+KEYWORD_REPEAT_MIN = 1
+
+
 def openDB():
     engine = create_engine("sqlite:///" + DB_NAME)
     Base = declarative_base()
@@ -24,7 +27,6 @@ def getFiles():
     for f in all:
         myList.append(schema.dumps(f))
     session.close()
-    #print(myList)
     return myList
 
 def getFolders():
@@ -34,6 +36,7 @@ def getFolders():
     # Serialize into json
     all = session.query(Folder).order_by(Folder.level)
     for f in all:
+        #print(f.parentID)
         myList.append(schema.dumps(f))
     session.close()
     #print(myList)
@@ -47,7 +50,8 @@ def getKeywords():
     allWords = session.query(Keyword).all()
     for word in allWords:
         freq = len(session.query(Link).filter(Link.keywordID == word.id).all())
-        wordList.append([word, freq])
+        if (freq >= KEYWORD_REPEAT_MIN):
+            wordList.append([word, freq])
     wordList = sorted(wordList, key=lambda k: k[1], reverse=True)
 
     # Serialize into json
@@ -61,7 +65,7 @@ def getKeywords():
 def getFile(name):
     session = openDB()
     schema = FileSchema()
-    file = session.query(File).filter(File.name == name).one()
+    file = session.query(File).filter(File.name == name).first()
     f = schema.dumps(file)
     session.close()
     return f

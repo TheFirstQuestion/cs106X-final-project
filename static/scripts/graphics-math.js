@@ -43,8 +43,8 @@ function randomPoint() {
 
 function gridPoints(center, width, numPoints) {
     var points = [];
-    var numPerRow = Math.min(Math.floor(width / (1.25 * DEFAULT_SHAPE_SIZE)), 1);
-    var numRows = Math.min(Math.floor(numPoints / numPerRow), 1);
+    var numPerRow = Math.max(Math.floor(width / (1.25 * DEFAULT_SHAPE_SIZE)), 1);
+    var numRows = Math.max(Math.floor(numPoints / numPerRow), 1);
     var verticalOffset = DEFAULT_SHAPE_SIZE * 1.25;
 
     for (var i = 0; i < numRows; i++) {

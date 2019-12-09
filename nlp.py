@@ -39,6 +39,7 @@ def cleanWords(text):
         if (token in stopwords or low in stopwords or token == "http"):
             continue
         # Make sure it's either a word or a proper noun (name, e.g.)
+        # or in properNouns
         if (token in allEnglishWords or token in properNouns):
             filteredWords.append(token)
 

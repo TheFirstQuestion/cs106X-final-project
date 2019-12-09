@@ -76,11 +76,16 @@ function finishGroup(name, items, pos, type) {
 }
 
 function wordText(name) {
-    return new fabric.Text(name, {
+    var word = new fabric.Text(name, {
       fontSize: DEFAULT_SHAPE_SIZE / 8,
       originX: 'center',
       originY: 'center'
     });
+    if (word.width > DEFAULT_SHAPE_SIZE) {
+        word = wordText(name.substr(0, name.length - 10) + "...");
+    }
+
+    return word;
 }
 
 function markCenter() {

@@ -38,16 +38,20 @@ function keywordsFromFile(f) {
 }
 
 function subfoldersOfFolder(name) {
-    console.log("name: " + name);
+    var folder = getFolder(name);
+    //console.log("folder: ");
+    //console.log(folder);
     var children = [];
     for (var i = 0; i < ALL_THE_FOLDERS.length; i++) {
         var parent = ALL_THE_FOLDERS[i].parent[0];
         if (typeof parent !== 'undefined') {
-            console.log(parent.name);
-            if (parent.name == name) {
-                console.log(ALL_THE_FOLDERS[i]);
+            //console.log(parent.id);
+            if (parent.id == folder.id) {
+                //console.log(ALL_THE_FOLDERS[i]);
                 children.push(ALL_THE_FOLDERS[i]);
             }
+        } else {
+            console.log(ALL_THE_FOLDERS[i]);
         }
     }
     return children;
@@ -77,11 +81,13 @@ function calculateWeight(keyword) {
             weight /= 4;
         }
     }
-    return weight;
+    return Math.floor(weight);
 }
 
 function suggestKeywords(typedText) {
     var possibilities = [];
+
+    var currentMin = 0;
     for (var i = 0; i < ALL_THE_KEYWORDS.length; i++) {
         var thisWord = ALL_THE_KEYWORDS[i];
         if (thisWord.word.startsWith(typedText)) {
@@ -89,5 +95,13 @@ function suggestKeywords(typedText) {
         }
     }
 
-    return possibilities;
+    return sortByWeight(possibilities);
+}
+
+
+function sortByWeight(myArray) {
+    myArray.sort(function(a, b) {
+        return calculateWeight(b) - calculateWeight(a);
+    });
+    return myArray;
 }

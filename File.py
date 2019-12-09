@@ -13,6 +13,7 @@ Base = declarative_base()
 
 ####### CONSTANTS #######
 FREQ_CUTOFF_WORD = 0.01
+KEYWORD_MIN_LENGTH = 3
 WEIGHT_KEYWORD = 3
 WEIGHT_FOLDER = 5
 WEIGHT_FILENAME = 4
@@ -55,11 +56,12 @@ class File(Base):
         self.wordFreq = self.countWords()
         self.phrases = self.getPhrases()
         self.addFolder(folders, session)
+        self.checkNameForKeyword(session)
 
-        # Add keywords!
+        # Add keywords and phrases
         #self.addKeyword(wordToAdd=self.name, weight=WEIGHT_FILENAME, session=session)
         for w in self.wordFreq:
-            if (self.wordFreq[w] >= FREQ_CUTOFF_WORD) and (len(w) > 2):
+            if (self.wordFreq[w] >= FREQ_CUTOFF_WORD) and (len(w) >= KEYWORD_MIN_LENGTH):
                 self.addKeyword(wordToAdd=w, weight=WEIGHT_KEYWORD, session=session)
         for p in self.phrases:
             phrase = " ".join(p)
@@ -104,6 +106,12 @@ class File(Base):
         else:
             session.add(Link(fileID=self.id, keywordID=row.id))
 
+    def checkNameForKeyword(self, session):
+        words = nlp.cleanWords(self.name)
+        words = words + nlp.cleanWords(self.path)
+        for w in words:
+            self.addKeyword(w, WEIGHT_FOLDER, session)
+
     def addFolder(self, path, session):
         # Check if already in database, because keyword must be unique and sqlalchemy is dumb and throws an exception
         row = session.query(Folder).filter(Folder.name == path[-1]).first()
@@ -126,6 +134,7 @@ class Keyword(Base):
     id = Column(Integer, primary_key=True)
     word = Column(String)
     terms = Column(Integer)
+    weight = Column(Integer)
     stem = Column(String)
     files = relationship("File", secondary="link", back_populates="keywords")
 
@@ -148,7 +157,7 @@ class Folder(Base):
     name = Column(String(250))
     path = Column(String(250))
     level = Column(Integer)
-    parentID = Column(ForeignKey('Folder.id'))
+    parentID = Column(Integer, ForeignKey("Folder.id"))
     parent = relationship("Folder")
     children = relationship("File", secondary="ff", back_populates="folder")
 

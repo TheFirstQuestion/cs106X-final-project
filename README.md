@@ -41,20 +41,21 @@ Also: notice that you can't open files natively! This is because your browser do
 * `python3 initializeDatabase.py` -- rescans all the files to generate the database; may take a while!
 * `python3 main.py`
 
+Click on a file or keyword to focus on it. Type into the box to search for keywords (case sensitive). Hold shift while clicking on a file to "open" the file (in a new window).
+
 ---
 
 ## TODO
-* write some instructions
 * create makefile?
 * multiple keyword filters
     * once chosen, go to top of screen, click again to un-choose
 * add weight calculations into ordering display, choosing which (in init too)
 * ability to search whole contents
+* make drawing a shape one function, independent of keyword/folder/file
 * UI tweaks:
     * animations!
     * add lines? (dashed, slightly darker blue)
     * shadow text box?
-    * shorten names if necessary to fit in shape (multi-line or ...)
     * adjust number of items shown at different times
 * Fixes (not  mission critical):
     * `'NoneType object is not iterable'`
