@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CS 106X</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <div id="container">
+        <input id="typingField" type="text" />
+
+        <script>
+            // Get the data into JavaScript variables
+            var ROOT_OF_FILE_SYSTEM = "{{ root }}".substring(2);
+
+            var ALL_THE_FILES = [];
+            {% for item in PYTHON_ALL_FILES %}
+                ALL_THE_FILES.push(JSON.parse({{ item|tojson }}));
+            {% endfor %}
+
+            var ALL_THE_KEYWORDS = [];
+            {% for item in PYTHON_ALL_KEYWORDS %}
+                ALL_THE_KEYWORDS.push(JSON.parse({{ item|tojson }}));
+            {% endfor %}
+
+            var ALL_THE_FOLDERS = [];
+            {% for item in PYTHON_ALL_FOLDERS %}
+                ALL_THE_FOLDERS.push(JSON.parse({{ item|tojson }}));
+            {% endfor %}
+
+            //console.log(ROOT_OF_FILE_SYSTEM);
+            //console.log(ALL_THE_FILES);
+            console.log(ALL_THE_FOLDERS);
+            //console.log(ALL_THE_KEYWORDS);
+        </script>
+
+        <!-- Basically everything else happens in main.js, and is displayed via Fabric.js on this canvas -->
+        <canvas id="myCanvas"></canvas>
+    </div>
+
+
+<!-- JavaScript libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.5.0/fabric.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        // Prevents submitting the text input
+        $("#typingField").keypress(function(e) {
+            if (e.keyCode == '13') {
+                e.preventDefault();
+            }
+        });
+        $("#typingField").keyup(function() {
+            dealWithTyping();
+        });
+    })
+    // Here we watch for the shift key being held, to distinguish from a regular click
+    var SHIFT_HELD = false;
+    $(window).keydown(function(evt) {
+        if (evt.which == 16) {
+            SHIFT_HELD = true;
+        }
+    }).keyup(function(evt) {
+        if (evt.which == 16) {
+            SHIFT_HELD = false;
+        }
+    });
+</script>
+
+<!-- My JavaScript -->
+<script src="{{ url_for('static', filename='scripts/data.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/graphics.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/graphics-math.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+html, body {
+    overflow: hidden;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#container {
+    position: relative;
+}
+
+#canvas {
+    position: absolute;
+}
+
+#typingField {
+    position: absolute;
+    z-index: 1000;
+    width: 500px;
+    height: 30px;
+    border-radius: 10px;
+    font-family: sans-serif;
+    font-size: 20px;
+    box-shadow: none;
+    border: none;
+    background: white;
+}

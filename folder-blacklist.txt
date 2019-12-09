@@ -1,0 +1,7 @@
+lib
+node_module
+bin
+python3
+.git
+.AppleDouble
+__pycache__

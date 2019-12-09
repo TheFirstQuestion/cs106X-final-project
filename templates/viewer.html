@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CS 106X</title>
+    <!-- CSS -->
+</head>
+<body>
+    <h1 id="name"></h1>
+    <p id="path"></p>
+    <p id="type"></p>
+    <p id="link"></p>
+    <div id="keywords"><h3>Keywords:</h3></div>
+    <hr>
+    <p id="contents"></p>
+
+
+<!-- JavaScript libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.5.0/fabric.min.js"></script>
+
+<script>
+    var file = JSON.parse({{ FILE|tojson }});
+    $("#name").text(file.name + "." + file.extension);
+    $("#path").text("Path: " + file.path);
+    $("#type").text("Type: " + file.type);
+    $("#contents").text("Contents: " + file.contents);
+
+    $('#keywords').append("<ul id='newList'></ul>");
+    for (var i = 0; i < file.keywords.length; i++) {
+      $("#newList").append("<li>" + file.keywords[i].word +"</li>");
+    }
+</script>
+
+
+</body>
+</html>
