@@ -11,7 +11,6 @@ from sqlalchemy.sql import func
 from sqlalchemy.orm import sessionmaker
 Base = declarative_base()
 
-
 ####### CONSTANTS #######
 FREQ_CUTOFF_WORD = 0.01
 WEIGHT_KEYWORD = 3
@@ -158,7 +157,7 @@ class Folder(Base):
         self.name = path[-1]
         self.level = len(path)
         self.parentID = self.findParent(path[:-1], session)
-        if (parentID is not None):
+        if (self.parentID is not None):
             self.parent.append(session.query(Folder).filter(Folder.id == self.parentID).one())
 
     def findParent(self, path, session):

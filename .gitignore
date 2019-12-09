@@ -2,3 +2,4 @@ Info/
 __pycache__
 Example File System/
 ENV-final-project/
+*.db
